@@ -4,10 +4,8 @@ print(50*'-')
 alunos = {}
 
 
-def alfabetica():
-    nomes = list(alunos.keys())
-    ordem = nomes.sort()
-    return ordem
+def exibe_aluno(pos, nome, notas):
+    print('%d. %s. Notas: %s. Média: %.1f' % (pos, nome, str(notas), sum(notas)/len(notas)))
 
 
 print('Selecione uma opção:')
@@ -79,7 +77,7 @@ while opcao != 15:
                 print('Nota removida com sucesso!')
             elif len(alunos[nome]) == 3:
                 print(f'Aluno(a) possui as notas\n1 - {alunos[nome][0]}\n2 - {alunos[nome][1]}\n3 - {alunos[nome][2]}\n')
-                remove = int(input('Qual nota deseja remover [1/2]? '))
+                remove = int(input('Qual nota deseja remover [1/2/3]? '))
                 while remove not in [1, 2, 3]:
                     print('opção invalida. Você deve digitar 1, 2 ou 3')
                     remove = input('Qual nota deseja remover [1/2]? ')
@@ -108,7 +106,7 @@ while opcao != 15:
                 elif len(alunos[nome]) == 3:
                     alunos[edit].append(alunos[nome][0])
                     alunos[edit].append(alunos[nome][1])
-                    alunos[edit].append(alunos[nome[2]])
+                    alunos[edit].append(alunos[nome][2])
                     del alunos[nome]
             else:
                 del alunos[nome]
@@ -116,80 +114,73 @@ while opcao != 15:
             print(f'Erro! O(A) Aluno(a) {nome} não foi cadastrado(a).')
         print('Nome editado com sucesso!')
     elif opcao == 6:
-        print('Editando nota do aluno')
-        if len(alunos[nome]) == 1:
-            print(f'Aluno(a) possui a nota: {alunos[nome][0]}')
-            editar = input('Deseja editá-la? [S (Sim)/ N (Não)] ')
-            editar = editar.upper()
-            if editar == 'S':
+        nome = input('Qual dos alunos(as) acima você deseja editar a nota? ')
+        nome = nome.upper()
+        if nome in alunos.keys():
+            print('Editando nota do aluno')
+            if len(alunos[nome]) == 1:
+                print(f'Aluno(a) possui a nota: {alunos[nome][0]}')
+                editar = input('Deseja editá-la? [S (Sim)/ N (Não)] ')
+                editar = editar.upper()
+                if editar == 'S':
+                    nota = float(input('Digite a nova nota: '))
+                    alunos[nome].pop()
+                    alunos[nome].append(nota)
+                    print('Nota editada com sucesso!')
+                elif remove == 'N':
+                    print('Operação cancelada!')
+                else:
+                    print('Erro. Opção inválida. Tente novamente')
+            elif len(alunos[nome]) == 2:
+                print(f'Aluno(a) possui as notas\n1 - {alunos[nome][0]}\n2 - {alunos[nome][1]}\n')
+                editar = int(input('Qual nota deseja editar [1/2]? '))
+                while editar not in [1, 2]:
+                    print('Opção invalida. Você deve digitar 1 ou 2')
+                    editar = int(input('Qual nota deseja remover [1/2]? '))
+                if editar == 1:
+                    nota = float(input('Digite a nova nota: '))
+                    alunos[nome].pop(0)
+                    alunos[nome].insert(0, nota)
+                    print('Nota editada com sucesso!')
+                elif editar == 2:
+                    nota = float(input('Digite a nova nota: '))
+                    alunos[nome].pop(1)
+                    alunos[nome].append(nota)
+                    print('Nota editada com sucesso!')
+                else:
+                    print('Erro! Opção inválida. Tente novamente.')
+            elif len(alunos[nome]) == 3:
+                print(f'Aluno(a) possui as notas\n1 - {alunos[nome][0]}\n2 - {alunos[nome][1]}\n3 - {alunos[nome][2]}\n')
+                editar = int(input('Qual nota deseja editar [1/2/3]? '))
+                while editar not in [1, 2, 3]:
+                    print('opção invalida. Você deve digitar 1, 2 ou 3')
+                    editar = int(input('Qual nota deseja remover [1/2/3]? '))
                 nota = float(input('Digite a nova nota: '))
-                alunos[nome].pop()
-                alunos[nome].append(nota)
-                print('Nota editada com sucesso!')
-            elif remove == 'N':
-                print('Operação cancelada!')
-            else:
-                print('Erro. Opção inválida. Tente novamente')
-        elif len(alunos[nome]) == 2:
-            print(f'Aluno(a) possui as notas\n1 - {alunos[nome][0]}\n2 - {alunos[nome][1]}\n')
-            editar = int(input('Qual nota deseja editar [1/2]? '))
-            while editar not in [1, 2]:
-                print('Opção invalida. Você deve digitar 1 ou 2')
-                editar = int(input('Qual nota deseja remover [1/2]? '))
-            if editar == 1:
-                nota = float(input('Digite a nova nota: '))
-                alunos[nome].pop(0)
-                alunos[nome].insert(0, nota)
-                print('Nota editada com sucesso!')
-            elif editar == 2:
-                nota = float(input('Digite a nova nota: '))
-                alunos[nome].pop(1)
-                alunos[nome].append(nota)
-                print('Nota editada com sucesso!')
-            else:
-                print('Erro! Opção inválida. Tente novamente.')
-        elif len(alunos[nome]) == 3:
-            print(f'Aluno(a) possui as notas\n1 - {alunos[nome][0]}\n2 - {alunos[nome][1]}\n3 - {alunos[nome][2]}\n')
-            editar = int(input('Qual nota deseja editar [1/2/3]? '))
-            while editar not in [1, 2, 3]:
-                print('opção invalida. Você deve digitar 1, 2 ou 3')
-                editar = int(input('Qual nota deseja remover [1/2/3]? '))
-            if editar == 1:
-                nota = float(input('Digite a nova nota: '))
-                alunos[nome].pop(0)
-                alunos[nome].insert(0, nota)
-                print('Nota editada com sucesso!')
-            elif editar == 2:
-                nota = float(input('Digite a nova nota: '))
-                alunos[nome].pop(1)
-                alunos[nome].insert(1, nota)
-                print('Nota editada com sucesso!')
-            elif editar == 3:
-                nota = float(input('Digite a nova nota: '))
-                alunos[nome].pop(2)
-                alunos[nome].append(nota)
+                alunos[nome].pop(editar-1)
+                alunos[nome].insert(editar-1, nota)
                 print('Nota editada com sucesso!')
             else:
-                print('Erro! Opção inválida. Tente novamente.')
-        else:
-            print('Aluno(a) não possui notas cadastradas.')
+                print('Aluno(a) não possui notas cadastradas.')
     elif opcao == 7:
         print('Buscando aluno por nome')
-        string = ''
         busca = input('Qual aluno(a) desejas buscar? ')
         busca = busca.upper()
+        pos = 1
+        for aluno in alunos:
+            if busca in aluno:
+                exibe_aluno(pos, aluno, alunos[aluno])
+            pos += 1
     elif opcao == 8:
         print('Calculando média da turma:')
-        media = 'MEDIA'
+        '''media = 'MEDIA'
         alunos[media] = []
         for notas in alunos[nome]:
             alunos[media] = sum(alunos[nome]) / 3
-        print(alunos)
+        print(alunos)'''
     elif opcao == 9:
         print('Exibir melhor aluno')
     elif opcao == 10:
         print('Exibir alunos em ordem alfabética')
-        print(alfabetica())
     elif opcao == 11:
         print('Exibir alunos ordenados por nota')
     elif opcao == 12:
