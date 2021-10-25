@@ -8,10 +8,14 @@ def exibe_aluno(pos, nome, notas):
     print('%d. %s. Notas: %s. Média: %.1f' % (pos, nome, str(notas), sum(notas)/len(notas)))
 
 
-def media_turma(nome, nota):
+def media_turma():
+    cont = 1
     nota = 0
-    for v in range(0, len(alunos) + 1):
-        nota += alunos[nome][v]
+    while cont <= len(alunos):
+        av = 1
+        while av <= 3:
+            nota += alunos[nome][av]
+            av += 1
     return nota
 
 
@@ -186,9 +190,9 @@ while opcao != 15:
         print(alunos)
     elif opcao == 8:
         print('Calculando média da turma:')
-        media_turma(nome, nota)
-        media_geral = nota / (3 * len(alunos))
-        print(media_geral)
+        media_turma()
+        media_geral = nota / (len(alunos * 3))
+        print('%.1f % media_geral')
     elif opcao == 9:
         print('Exibir melhor aluno')
     elif opcao == 10:

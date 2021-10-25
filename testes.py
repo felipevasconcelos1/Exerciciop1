@@ -4,8 +4,4 @@ alunos = {
     'Thiago': [10, 10, 10]
 }
 
-media = 0
-for v in alunos.values():
-    media += v
-    print(v)
-media_turma = media / (3 * len(alunos))
+print(alunos['Felipe'][1])
