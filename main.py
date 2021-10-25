@@ -8,6 +8,13 @@ def exibe_aluno(pos, nome, notas):
     print('%d. %s. Notas: %s. Média: %.1f' % (pos, nome, str(notas), sum(notas)/len(notas)))
 
 
+def media_turma(nome, nota):
+    nota = 0
+    for v in range(0, len(alunos) + 1):
+        nota += alunos[nome][v]
+    return nota
+
+
 print('Selecione uma opção:')
 opcoes = '1. Adicionar Aluno\n2. Adicionar nota\n3. Remover Aluno\n4. Remover nota\n5. Editar nome do aluno\n6. Editar nota do aluno\n7. Buscar aluno por nome\n8. Calcular média da turma\n9. Exibir melhor aluno\n10. Exibir alunos em ordem alfabética\n11. Exibir alunos ordanos por nota\n12. Exibir alunos aprovados por média\n13. Exibir alunos na final\n14. Exibir alunos reprovados\n15. Encerra o programa\nEscolha uma opção de 1 a 15\n'
 opcao = int(input(opcoes))
@@ -24,6 +31,7 @@ while opcao != 15:
             print(f'Aluno(a) {nome} adicionado(a) com sucesso')
         else:
             print(f'O(A) aluno(a) {nome} já foi cadastrado anteriormente!')
+        print(alunos)
     elif opcao == 2:
         print('Adicionando nota')
         nome = input('De qual aluno você deseja adicior nota? ')
@@ -40,6 +48,7 @@ while opcao != 15:
                 print(f'O(A) aluno(a) {nome} já possui as 3 notas registradas')
         else:
             print('Erro! Aluno(a) inexistente')
+        print(alunos)
     elif opcao == 3:
         print('Removendo Aluno')
         nome = input('Digite o nome do(a) aluno(a) a ser removido(a): ')
@@ -49,6 +58,7 @@ while opcao != 15:
             print(f'Aluno(a) {nome} removido(a) com sucesso!')
         else:
             print(f'Erro! O(A) aluno(a) {nome} não foi cadastrado(a) no sistema!')
+        print(alunos)
     elif opcao == 4:
         print('Removendo nota')
         nome = input('De qual aluno(a) você deseja remover a nota? ')
@@ -85,6 +95,7 @@ while opcao != 15:
                 print('Nota removida com sucesso!')
             else:
                 print('Aluno(a) não possui notas cadastradas.')
+        print(alunos)
     elif opcao == 5:
         print('Editando nome do(a) aluno(a)')
         for keys in alunos.keys():
@@ -113,6 +124,7 @@ while opcao != 15:
         else:
             print(f'Erro! O(A) Aluno(a) {nome} não foi cadastrado(a).')
         print('Nome editado com sucesso!')
+        print(alunos)
     elif opcao == 6:
         nome = input('Qual dos alunos(as) acima você deseja editar a nota? ')
         nome = nome.upper()
@@ -161,6 +173,7 @@ while opcao != 15:
                 print('Nota editada com sucesso!')
             else:
                 print('Aluno(a) não possui notas cadastradas.')
+        print(alunos)
     elif opcao == 7:
         print('Buscando aluno por nome')
         busca = input('Qual aluno(a) desejas buscar? ')
@@ -170,13 +183,12 @@ while opcao != 15:
             if busca in aluno:
                 exibe_aluno(pos, aluno, alunos[aluno])
             pos += 1
+        print(alunos)
     elif opcao == 8:
         print('Calculando média da turma:')
-        '''media = 'MEDIA'
-        alunos[media] = []
-        for notas in alunos[nome]:
-            alunos[media] = sum(alunos[nome]) / 3
-        print(alunos)'''
+        media_turma(nome, nota)
+        media_geral = nota / (3 * len(alunos))
+        print(media_geral)
     elif opcao == 9:
         print('Exibir melhor aluno')
     elif opcao == 10:

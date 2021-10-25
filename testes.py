@@ -4,10 +4,8 @@ alunos = {
     'Thiago': [10, 10, 10]
 }
 
-print(alunos.keys())
-lista_alunos = []
-for k in alunos:
-    lista_alunos.append(alunos)
-
-lista_alunos.sort()
-print(lista_alunos)
+media = 0
+for v in alunos.values():
+    media += v
+    print(v)
+media_turma = media / (3 * len(alunos))
