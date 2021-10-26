@@ -3,19 +3,44 @@ print('')
 print(50*'-')
 alunos = {}
 
-def calcula_media(notas) :
+
+def calcula_media(notas):
     media = sum(notas)/3
     return media
+
 
 def exibe_aluno(pos, nome, notas):
     print('%d. %s. Notas: %s. Média: %.1f' % (pos, nome, str(notas), calcula_media(notas)))
 
-def media_turma(alunos) :
+
+def media_turma():
     soma_medias = 0
-    for aluno in alunos :
+    for aluno in alunos:
         notas = alunos[aluno]
         soma_medias += calcula_media(notas)
     return soma_medias / len(alunos)
+
+
+def aprovados():
+    for nome in alunos:
+        media = sum(alunos[nome]) / 3
+        if media >= 7:
+            print(nome)
+
+
+def alunos_final():
+    for nome in alunos:
+        media = sum(alunos[nome]) / 3
+        if media < 7 and media >= 5:
+            print(nome)
+
+
+def alunos_reprovados():
+    for nome in alunos:
+        media = sum(alunos[nome]) / 3
+        if media < 5:
+            print(nome)
+
 
 print('Selecione uma opção:')
 opcoes = '1. Adicionar Aluno\n2. Adicionar nota\n3. Remover Aluno\n4. Remover nota\n5. Editar nome do aluno\n6. Editar nota do aluno\n7. Buscar aluno por nome\n8. Calcular média da turma\n9. Exibir melhor aluno\n10. Exibir alunos em ordem alfabética\n11. Exibir alunos ordanos por nota\n12. Exibir alunos aprovados por média\n13. Exibir alunos na final\n14. Exibir alunos reprovados\n15. Encerra o programa\nEscolha uma opção de 1 a 15\n'
@@ -195,11 +220,20 @@ while opcao != 15:
     elif opcao == 11:
         print('Exibir alunos ordenados por nota')
     elif opcao == 12:
-        print('exibir alunos aprovados por média')
+        print(50*'-')
+        print('\nAlunos aprovados por média: ')
+        aprovados()
+        print('')
     elif opcao == 13:
-        print('Exibir alunos na final')
+        print(50*'-')
+        print('\nAlunos na final:')
+        alunos_final()
+        print('')
     elif opcao == 14:
-        print('Exibir alunos reprovados')
+        print(50*'-')
+        print('\nAlunos reprovados:')
+        alunos_reprovados()
+        print('')
     else:
         print('Opção inválida')
 
