@@ -4,7 +4,6 @@ print(50*'-')
 print('')
 alunos = {}
 
-
 def calcula_media(notas):
     media = sum(notas)/3
     return media
@@ -20,45 +19,28 @@ def media_turma(alunos):
         soma_medias += calcula_media(notas)
     return soma_medias / len(alunos)
 
-
 # 9
-def melhor_aluno(alunos, nome):
+def melhor_aluno() :
     melhor = 0
-    best = ''
+    best = " "
     for nome in alunos:
         media = sum(alunos[nome]) / 3
         if media > melhor:
             melhor = media
             best = nome
-    print(f'{best} - Média: {melhor}')
+    print(f"{best} - Média: {melhor}")
 
-        
+
 # 10
-def alunos_alfabetica(alunos, nome) :
-    alfabetica = []
-    for nome in alunos :
-        alfabetica.append(nome)
+def alunos_alfabetica() :
+    alfabetica = list(alunos.keys())
     alfabetica.sort()
-    for pos in range(1, len(alfabetica) + 1) :
-        print(pos, alfabetica[pos -1])
-    '''for pos in range(1, len(alfabetica) + 1) :
-        print(f'{pos} {alfabetica[pos-1]}, Notas: {alunos[alfabetica]} Média: {sum(alunos[alfabetica]/3)}')'''
-
-
-# 11
-def alunos_nota(alunos, nome):
-    lista = list(alunos.keys() + alunos[nome])
-    for posicao in range(len(lista)):
-        elemento = lista[posicao]
-        posicao_descida = elemento
-        while posicao_descida > 0 and lista[posicao_descida] < lista[posicao_descida - 1]:
-            temp = lista[posicao_descida]
-            lista[posicao_descida] = lista[posicao_descida - 1]
-            lista[posicao_descida - 1] = temp
-            posicao_descida -= 1
-        posicao += 1
-    print(lista)
-
+    pos = 1
+    for nome in alfabetica :
+        nota = alunos[nome]
+        print(f"{pos} {nome}, Notas: {nota}, Media: %.1f" % (sum(nota)/3))
+        pos += 1
+    
 
 def aprovados():
     for nome in alunos:
@@ -72,7 +54,8 @@ def alunos_final():
         media = sum(alunos[nome]) / 3
         if media < 7 and media >= 5:
             print(nome)
-    
+
+
 def alunos_reprovados():
     for nome in alunos:
         media = sum(alunos[nome]) / 3
@@ -81,13 +64,14 @@ def alunos_reprovados():
 
 
 print('Selecione uma opção:')
-opcoes = '1. Adicionar Aluno\n2. Adicionar nota\n3. Remover Aluno\n4. Remover nota\n5. Editar nome do aluno\n6. Editar nota do aluno\n7. Buscar aluno por nome\n8. Calcular média da turma\n9. Exibir melhor aluno\n10. Exibir alunos em ordem alfabética\n11. Exibir alunos ordanos por nota\n12. Exibir alunos aprovados por média\n13. Exibir alunos na final\n14. Exibir alunos reprovados\n15. Encerra o programa\nEscolha uma opção de 1 a 15\n'
+opcoes = '1. Adicionar Aluno\n2. Adicionar nota\n3. Remover Aluno\n4. Remover nota\n5. Editar nome do aluno\n6. Editar nota do aluno\n7. Buscar aluno por nome\n8. Calcular média da turma\n9. Exibir melhor aluno\n10. Exibir alunos em ordem alfabética\n11. Exibir alunos aprovados por média\n12. Exibir alunos na final\n13. Exibir alunos reprovados\n14. Encerra o programa\nEscolha uma opção de 1 a 14\n'
 opcao = int(input(opcoes))
-while opcao != 15:
+while opcao != 14:
     if opcao == 1:
         print('Adicionando aluno')
         print('IMPORTANTE: Para uma melhor funcionalidade do sistema, recomenda-se a digitação do nome completo')
         nome = input('Digite o nome do(a) aluno(a) a ser adicionado(a): ')
+        nome = nome.upper()
         if nome not in alunos.keys():
             nome = nome.upper()
             alunos[nome] = []
@@ -95,6 +79,7 @@ while opcao != 15:
         else:
             print(f'O(A) aluno(a) {nome} já foi cadastrado anteriormente!')
         print(alunos)
+
     elif opcao == 2:
         print('Adicionando nota')
         nome = input('De qual aluno você deseja adicior nota? ')
@@ -112,6 +97,7 @@ while opcao != 15:
         else:
             print('Erro! Aluno(a) inexistente')
         print(alunos)
+
     elif opcao == 3:
         print('Removendo Aluno')
         nome = input('Digite o nome do(a) aluno(a) a ser removido(a): ')
@@ -122,6 +108,7 @@ while opcao != 15:
         else:
             print(f'Erro! O(A) aluno(a) {nome} não foi cadastrado(a) no sistema!')
         print(alunos)
+
     elif opcao == 4:
         print('Removendo nota')
         nome = input('De qual aluno(a) você deseja remover a nota? ')
@@ -159,6 +146,7 @@ while opcao != 15:
             else:
                 print('Aluno(a) não possui notas cadastradas.')
         print(alunos)
+
     elif opcao == 5:
         print('Editando nome do(a) aluno(a)')
         for keys in alunos.keys():
@@ -188,6 +176,7 @@ while opcao != 15:
             print(f'Erro! O(A) Aluno(a) {nome} não foi cadastrado(a).')
         print('Nome editado com sucesso!')
         print(alunos)
+
     elif opcao == 6:
         print(alunos)
         nome = input('Qual dos alunos(as) acima você deseja editar a nota? ')
@@ -238,6 +227,7 @@ while opcao != 15:
             else:
                 print('Aluno(a) não possui notas cadastradas.')
         print(alunos)
+
     elif opcao == 7:
         print('Buscando aluno por nome')
         busca = input('Qual aluno(a) desejas buscar? ')
@@ -248,44 +238,42 @@ while opcao != 15:
                 exibe_aluno(pos, aluno, alunos[aluno])
             pos += 1
         print(alunos)
+
     elif opcao == 8:
         print('Calculando média da turma:')
         print('Media da Turma:', media_turma(alunos))
+
     elif opcao == 9:
-        print('Exibindo melhor aluno(a):\n')
-        melhor_aluno(alunos, nome)
+        print('Exibindo melhor aluno(a):')
+        print(melhor_aluno())
+
     elif opcao == 10:
         print('Exibir alunos em ordem alfabética\n')
-        alunos_alfabetica(alunos, nome)
-    elif opcao == 11:
-        print('Exibir alunos ordenados por nota\n')
-        alunos_nota(alunos, nome)
+        print(alunos_alfabetica())
 
-    elif opcao == 12:
+    elif opcao == 11:
         print('exibir alunos aprovados por média')
         print(50*'-')
         print('\nAlunos aprovados por média: ')
         aprovados()
         print('')
-    elif opcao == 13:
+    elif opcao == 12:
         print('Exibir alunos na final')
         print(50*'-')
         print('\nAlunos na final:')
         alunos_final()
         print('')
-    elif opcao == 14:
-        print('Exibir alunos reprovados')
+    elif opcao == 13:
+        print('Exibir alunos reprovados\n')
         print(50*'-')
         print('\nAlunos reprovados:')
         alunos_reprovados()
         print('')
-    elif opcao == 16:
-        print(len(alunos))
     else:
         print('Opção inválida')
 
-    opcoes = '1. Adicionar Aluno\n2. Adicionar nota\n3. Remover Aluno\n4. Remover nota\n5. Editar nome do aluno\n6. Editar nota do aluno\n7. Buscar aluno por nome\n8. Calcular média da turma\n9. Exibir melhor aluno\n10. Exibir alunos em ordem alfabética\n11. Exibir alunos ordanos por nota\n12. Exibir alunos aprovados por média\n13. Exibir alunos na final\n14. Exibir alunos reprovados\n15. Encerra o programa\nEscolha uma opção de 1 a 15\n'
+    opcoes = '1. Adicionar Aluno\n2. Adicionar nota\n3. Remover Aluno\n4. Remover nota\n5. Editar nome do aluno\n6. Editar nota do aluno\n7. Buscar aluno por nome\n8. Calcular média da turma\n9. Exibir melhor aluno\n10. Exibir alunos em ordem alfabética\n11. Exibir alunos aprovados por média\n12. Exibir alunos na final\n13. Exibir alunos reprovados\n14. Encerra o programa\nEscolha uma opção de 1 a 14\n'
     opcao = int(input(opcoes))
 print(50*'-')
-print('Obrigado por usar nosso sistema. Até mais!!')
+print('Obrigado por usar nosso sistema. Até mais!!\n')
 print(alunos)
